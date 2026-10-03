@@ -1243,6 +1243,36 @@ img {
   margin: 12px 0;
 }
 
+.article-code {
+  max-width: 100%;
+  margin: 20px 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-soft);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+.article-code code {
+  font: inherit;
+  white-space: pre;
+}
+
+.article-steps {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+  padding-left: 24px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+
 .article-takeaways {
   margin-top: 26px;
   padding: 22px 24px;
