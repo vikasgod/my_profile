@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { MotionConfig, motion } from "framer-motion";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -18,8 +18,18 @@ import {
 import { skills, experience, projects, education } from "../data/portfolioData";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 35 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.65 } },
+  hidden: { opacity: 0, y: 24, filter: "blur(4px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const staggerIn = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } },
 };
 
 function Section({ id, eyebrow, title, children }) {
@@ -42,6 +52,7 @@ function Section({ id, eyebrow, title, children }) {
 
 function HomePage() {
   return (
+    <MotionConfig reducedMotion="user">
     <main>
       <section id="home" className="hero">
         <div className="hero-grid" />
@@ -104,12 +115,17 @@ function HomePage() {
           <div className="orbit-ring ring-one" />
           <div className="orbit-ring ring-two" />
           <div className="code-card">
-            <div className="code-top">
-              <span />
-              <span />
-              <span />
-            </div>
-            <pre>{`const developer = {
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
+              >
+                <div className="code-top">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <pre>{`const developer = {
   name: "Vikas G God",
   role: "Full Stack Developer",
   experience: "4+ years",
@@ -119,6 +135,7 @@ function HomePage() {
   ],
   passion: "Building products"
 };`}</pre>
+              </motion.div>
           </div>
         </motion.div>
       </section>
@@ -152,24 +169,24 @@ function HomePage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            variants={fadeUp}
+            variants={staggerIn}
           >
-            <div className="stat">
+            <motion.div className="stat" variants={fadeUp}>
               <strong>4+</strong>
               <span>Years Experience</span>
-            </div>
-            <div className="stat">
+            </motion.div>
+            <motion.div className="stat" variants={fadeUp}>
               <strong>8+</strong>
               <span>Featured Projects</span>
-            </div>
-            <div className="stat">
+            </motion.div>
+            <motion.div className="stat" variants={fadeUp}>
               <strong>15+</strong>
               <span>Core Technologies</span>
-            </div>
-            <div className="stat">
+            </motion.div>
+            <motion.div className="stat" variants={fadeUp}>
               <strong>3</strong>
               <span>Languages</span>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </Section>
@@ -184,6 +201,8 @@ function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.035 }}
+              whileHover={{ y: -4, transition: { duration: 0.18 } }}
+              whileTap={{ scale: 0.98 }}
             >
               <Code2 size={17} />
               <div>
@@ -246,6 +265,7 @@ function HomePage() {
               viewport={{ once: true }}
               variants={fadeUp}
               transition={{ delay: i * 0.05 }}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
               <div className="project-number">0{i + 1}</div>
               <div className="project-icon">
@@ -272,6 +292,7 @@ function HomePage() {
               whileInView="show"
               viewport={{ once: true }}
               variants={fadeUp}
+              whileHover={{ y: -4, transition: { duration: 0.18 } }}
             >
               <GraduationCap size={25} />
               <span>{year}</span>
@@ -326,6 +347,7 @@ function HomePage() {
         </motion.div>
       </section>
     </main>
+    </MotionConfig>
   );
 }
 

@@ -56,7 +56,7 @@ function AppLayout() {
 
       <footer>
         <span>© {new Date().getFullYear()} Vikas G God</span>
-        <button onClick={() => navigate("/")}>
+        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           <ArrowUp size={16} /> Back to top
         </button>
       </footer>
